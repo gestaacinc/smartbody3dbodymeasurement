@@ -188,57 +188,76 @@ CREATE TABLE Models (
 
 Below is an example project directory structure for your Flask-based mobile web app that includes a dedicated `model.html` for the 3D view:
  ```
-my_measurement_app/
-├── app.py                        # Main Flask application entry point
-├── requirements.txt              # Python dependencies (Flask, SQLAlchemy, etc.)
-├── config.py                     # Configuration settings (database URI, secret keys, etc.)
-├── run.py                        # Script to run the application (for development/production)
-├── .env                          # Environment variables for secret config
-├── migrations/                   # Database migration scripts (if using Flask-Migrate)
+Absolutely — this is actually a cleaner and more **modular Flask application structure**. Let’s restructure your project properly with:
 
-├── models/
-│   ├── __init__.py               # Initialization file for all models
-│   ├── user.py                   # User model (for registration and login)
-│   ├── profile.py                # Profile model (for personal data like height, weight, etc.)
-│   └── measurement.py            # Measurement model (for body measurement data)
+- 📁 `mobile_body_eval/` as the **root folder**
+- 📁 `mobile_body_eval/app/` containing all application logic
+- Base files like `.env`, `config.py`, `run.py`, and `requirements.txt` **outside** the `app` directory
 
-├── routes/
-│   ├── __init__.py               # Blueprint initialization for routes
-│   ├── auth.py                   # Endpoints for registration, login, and logout
-│   ├── profile.py                # Endpoints for profile viewing and updating
-│   ├── measurement.py            # Endpoints for capturing, verifying, and saving measurements
-│   ├── export.py                 # Endpoint for exporting measurements to Excel
-│   └── model.py                  # Endpoint to serve the 3D model view
+---
+ 
+Here's the formatted project structure in Markdown:
 
-├── static/
-│   ├── css/
-│   │   └── main.css              # Custom stylesheets (including Bootstrap or Tailwind overrides)
-│   ├── js/
-│   │   ├── model-viewer.js       # JavaScript for initializing and interacting with the 3D model (e.g., Three.js code)
-│   │   └── main.js               # Additional client-side scripts (e.g., for camera handling and form validations)
-│   └── images/                   # Directory for static images or icons
+```markdown
+  
+mobile_body_eval/
+├── app/
+│   ├── __init__.py          # App factory, extension initialization, blueprint registration
+│   ├── models/
+│   │   ├── __init__.py      # Import/export all models here
+│   │   ├── user.py          # User model
+│   │   ├── profile.py       # Profile model
+│   │   └── measurement.py   # Measurement model
+│   ├── routes/
+│   │   ├── __init__.py      # Blueprint imports
+│   │   ├── auth.py         # Registration/login/logout routes
+│   │   ├── profile.py      # Profile management routes
+│   │   ├── measurement.py  # Measurement capture/verification routes
+│   │   ├── export.py       # Excel export route
+│   │   └── model.py       # 3D model view route
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── main.css    # Custom styles
+│   │   ├── js/
+│   │   │   ├── model-viewer.js  # 3D rendering logic (Three.js/Babylon.js)
+│   │   │   └── main.js          # Camera, pose detection, validation
+│   │   └── images/              # Icons and graphics
+│   ├── templates/
+│   │   ├── layout.html          # Base layout with header/footer
+│   │   ├── auth/
+│   │   │   ├── login.html
+│   │   │   └── register.html
+│   │   ├── profile/
+│   │   │   └── profile.html
+│   │   ├── measurement/
+│   │   │   ├── capture.html
+│   │   │   ├── verify.html
+│   │   │   └── export.html
+│   │   └── model/
+│   │       └── model.html
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── exporter.py         # Excel generation logic
+│   │   └── pose_processing.py  # Pixel-to-cm calculations, keypoint logic
+│   └── docs/
+│       └── README.md           # Developer notes and setup instructions
+├── migrations/                 # Auto-generated migration scripts via Flask-Migrate
+├── .env                        # Environment variables (DB URI, secrets)
+├── config.py                   # Flask config classes (Dev, Prod, etc.)
+├── run.py                      # App entry point
+├── requirements.txt            # Python dependencies
+└── venv/                       # Python virtual environment (excluded from version control)
+```
 
-├── templates/
-│   ├── layout.html               # Base template with common header, footer, and navigation
-│   ├── auth/
-│   │   ├── login.html            # Template for the login page
-│   │   └── register.html         # Template for the registration page
-│   ├── profile/
-│   │   └── profile.html          # Template for the user profile and personal data input
-│   ├── measurement/
-│   │   ├── capture.html          # Template for the real-time measurement capture page
-│   │   ├── verify.html           # Template for measurement verification and re-capture
-│   │   └── export.html           # Template for export confirmation/download
-│   └── model/
-│       └── model.html            # Dedicated template for the 3D model visualization view
+---
 
-├── utils/
-│   ├── __init__.py
-│   ├── exporter.py               # Excel export helper functions
-│   └── pose_processing.py        # Pose-to-measurement conversion logic
+### ✅ Next Step: Let's Do the Initial Setup Again
 
-└── docs/
-    └── README.md                 # Project documentation (features, API endpoints, setup instructions, etc.)
+Would you like me to:
+1. Walk you step-by-step again for setup based on this revised structure?
+2. Or give you a single consolidated script (for PowerShell or manual)?
+
+Let me know your preference so we can proceed cleanly with the new structure.
 ```
 ---
 
