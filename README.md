@@ -187,19 +187,21 @@ CREATE TABLE Models (
 ## Project Structure
 
 Below is an example project directory structure for your Flask-based mobile web app that includes a dedicated `model.html` for the 3D view:
-
-```
+ ```
 my_measurement_app/
 ├── app.py                        # Main Flask application entry point
 ├── requirements.txt              # Python dependencies (Flask, SQLAlchemy, etc.)
 ├── config.py                     # Configuration settings (database URI, secret keys, etc.)
 ├── run.py                        # Script to run the application (for development/production)
+├── .env                          # Environment variables for secret config
 ├── migrations/                   # Database migration scripts (if using Flask-Migrate)
+
 ├── models/
 │   ├── __init__.py               # Initialization file for all models
 │   ├── user.py                   # User model (for registration and login)
 │   ├── profile.py                # Profile model (for personal data like height, weight, etc.)
 │   └── measurement.py            # Measurement model (for body measurement data)
+
 ├── routes/
 │   ├── __init__.py               # Blueprint initialization for routes
 │   ├── auth.py                   # Endpoints for registration, login, and logout
@@ -207,26 +209,37 @@ my_measurement_app/
 │   ├── measurement.py            # Endpoints for capturing, verifying, and saving measurements
 │   ├── export.py                 # Endpoint for exporting measurements to Excel
 │   └── model.py                  # Endpoint to serve the 3D model view
+
 ├── static/
 │   ├── css/
-│   │   └── main.css              # Custom stylesheets (including Bootstrap overrides)
+│   │   └── main.css              # Custom stylesheets (including Bootstrap or Tailwind overrides)
 │   ├── js/
 │   │   ├── model-viewer.js       # JavaScript for initializing and interacting with the 3D model (e.g., Three.js code)
 │   │   └── main.js               # Additional client-side scripts (e.g., for camera handling and form validations)
 │   └── images/                   # Directory for static images or icons
+
 ├── templates/
 │   ├── layout.html               # Base template with common header, footer, and navigation
-│   ├── login.html                # Template for the login page
-│   ├── register.html             # Template for the registration page
-│   ├── profile.html              # Template for the user profile and personal data input
-│   ├── capture.html              # Template for the real-time measurement capture page
-│   ├── verify.html               # Template for measurement verification and re-capture
-│   ├── export.html               # Template for export confirmation/download
-│   └── model.html                # Dedicated template for the 3D model visualization view
+│   ├── auth/
+│   │   ├── login.html            # Template for the login page
+│   │   └── register.html         # Template for the registration page
+│   ├── profile/
+│   │   └── profile.html          # Template for the user profile and personal data input
+│   ├── measurement/
+│   │   ├── capture.html          # Template for the real-time measurement capture page
+│   │   ├── verify.html           # Template for measurement verification and re-capture
+│   │   └── export.html           # Template for export confirmation/download
+│   └── model/
+│       └── model.html            # Dedicated template for the 3D model visualization view
+
+├── utils/
+│   ├── __init__.py
+│   ├── exporter.py               # Excel export helper functions
+│   └── pose_processing.py        # Pose-to-measurement conversion logic
+
 └── docs/
     └── README.md                 # Project documentation (features, API endpoints, setup instructions, etc.)
 ```
-
 ---
 
 ## Additional Notes
