@@ -151,18 +151,24 @@ CREATE TABLE Profiles (
 );
 ```
 
-### Measurements Table
+### 📐 Measurements Table
+
+This table stores measurement results derived from pose detection, including metadata like accuracy, pose angle, and calibration scaling.
 
 ```sql
 CREATE TABLE Measurements (
     measurement_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    measurement_data JSON,  -- Stores computed measurements (e.g., chest, waist, hips, etc.)
-    is_accurate BOOLEAN DEFAULT FALSE,
+    measurement_data JSON,  -- Stores keypoints and computed metrics
+    pose_type ENUM('front', 'side', 'combined') DEFAULT 'combined',  -- Which camera view was used
+    calibration_ratio FLOAT,  -- Pixel-to-cm scaling factor
+    is_accurate BOOLEAN DEFAULT FALSE,  -- Computation deemed accurate by system
+    verified_by_user BOOLEAN DEFAULT FALSE,  -- Confirmed by user
+    capture_session_id VARCHAR(64),  -- Logical group ID for multi-view session
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
-```
+
 
 ### Models Table (Optional for storing 3D model file references)
 
